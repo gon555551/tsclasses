@@ -8,6 +8,7 @@
 
 name: Upload Python Package
 
+
 on:
   release:
     types: [published]
@@ -18,7 +19,10 @@ permissions:
 jobs:
   deploy:
 
-    runs-on: windows-latest
+    runs-on: ubunto-latest
+
+    permissions:
+    - id-token: write
 
     steps:
     - uses: actions/checkout@v3
@@ -37,3 +41,7 @@ jobs:
       with:
         user: __token__
         password: ${{ secrets.PYPI_API_TOKEN }}
+
+    - name: pypi-publish
+      uses: pypa/gh-action-pypi-publish@v1.8.11
+            
