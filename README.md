@@ -1,0 +1,1 @@
+# Class Attribute Type Validation
