@@ -5,9 +5,7 @@ build-backend = "hatchling.build"
 [project]
 name = "TSclasses"
 version = "0.0.1"
-authors = [
-  { name="", email="" },
-]
+authors = []
 description = "Simple Class Attribute Type Validation"
 readme = "README.md"
 requires-python = ">=3.8"
