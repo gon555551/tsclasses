@@ -1,8 +1,5 @@
 __pycache__
 
-# hatch
-dist
-
 # venv
 Include
 Lib
