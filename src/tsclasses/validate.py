@@ -6,7 +6,7 @@ class ValidationError(BaseException):
 
 class Validate:
     def __new__(cls, *args, **kwargs):
-        invalid_keys = " ".join(
+        invalid_keys = ", ".join(
             [
                 key
                 for key in filter(
