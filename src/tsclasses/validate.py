@@ -20,7 +20,7 @@ class Validate:
         if len(args) > len(cls.__annotations__):
             raise (
                 TypeError(
-                    f"{cls} is annotated with {len(cls.__annotations__)} attributes but {len(args)} were given"
+                    f"{cls} is annotated with {len(cls.__annotations__)} attributes but it was initialized with {len(args)}"
                 )
             )
 
@@ -70,10 +70,24 @@ class Validate:
                 suber.__getattribute__(method).__name__,
                 wrapper(suber.__getattribute__(method)),
             )
-            for method in suber.__dir__()[:-1].copy()
+            for method in suber.__dir__().copy()
             if callable(suber.__getattribute__(method))
-            and suber.__getattribute__(method).__name__ != "__getattribute__" # These two methods are excluded to avoid recursion
-            and suber.__getattribute__(method).__name__ != "__dir__"          # This might be work-around-able...
-        ]
+            and suber.__getattribute__(method).__name__
+            not in [
+                "__class__",
+                "__getattribute__",
+                "__dir__",
+            ]  # __getattribute__ and __dir__ are to avoid recursion,
+        ]  # there may be a way to work around
 
         return suber
+
+
+def validate(cls):
+    def inner(*args, **kwargs):
+        new_class = type(f"{cls.__name__}", (Validate, cls), {})
+        setattr(new_class, "__annotations__", cls.__annotations__)
+        setattr(new_class, "__init__", cls.__init__)
+        return new_class(*args, **kwargs)
+
+    return inner

@@ -1,8 +1,8 @@
 # Class Attribute Type Validation
 
-Includes the `Validate` superclass and the `ValidationError` exception.
+Includes the `Validate` superclass, the `validate` decorator, and the `ValidationError` exception.
 
-Inheriting from `Validate` will result in instantiation type-checking based on annotations, as well as in-method attribute static-typing by raising `ValidationError`.
+Inheriting from `Validate` or using the `validate` decorator will result in instantiation type-checking based on annotations, as well as in-method attribute static-typing by raising `ValidationError`.
 
 ## Example
 ```python
